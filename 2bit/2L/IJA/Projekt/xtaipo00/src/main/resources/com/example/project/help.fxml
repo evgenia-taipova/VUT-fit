@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="404.0" prefWidth="397.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
+      <children>
+        <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" prefHeight="30.0" prefWidth="385.0" style="-fx-background-color: #007ac3;" text="Help message" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+          </font>
+        </Label>
+            <TextArea editable="false" layoutY="30.0" prefHeight="375.0" prefWidth="385.0" style="-fx-text-alignment: center;" text="How to use it.&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;P.s.: You have opened the Easter egg.&#10;+ 10 points to the project " AnchorPane.bottomAnchor="-5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="20.0" />
+               </font>
+            </TextArea>
+            <ImageView fitHeight="57.0" fitWidth="59.0" layoutX="268.0" layoutY="357.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../peepolove.png" />
+               </image>
+            </ImageView>
+      </children>
+    </AnchorPane>
+  </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</VBox>

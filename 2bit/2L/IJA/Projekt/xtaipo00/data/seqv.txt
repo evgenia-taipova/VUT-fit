@@ -1,0 +1,20 @@
+@startsequml
+
+participant Main
+participant ClassDiagram
+participant UMLClass
+participant UMLAttribute
+
+operation createClass("c1") : Main to ClassDiagram syn
+operation <<create>>("c1") : ClassDiagram to UMLClass make
+operation c1 : ClassDiagram to Main back
+operation classifierForName("int) : Main to ClassDiagram syn
+operation cInt : ClassDiagram to Main back
+
+operation <<create>>("a1",cInt) : Main to UMLAttribute syn
+operation addAttribute(a1) : Main to UMLClass syn
+operation true : UMLClass to Main back
+operation isAbstract() : Main to UMLAttribute syn
+operation false : UMLAttribute to Main back
+
+@endsequml

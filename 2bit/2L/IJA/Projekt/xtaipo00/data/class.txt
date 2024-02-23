@@ -1,0 +1,44 @@
+@startuml
+
+class UMLAttribute {
+attribute + UMLClassifier type
+operation + UMLClassifier getType()
+}
+
+class Element {
+attribute + String name
+operation + null Element(name:String)
+operation + String getName()
+operation + void rename(name:String)
+}
+
+
+class ClassDiagram {
+attribute + List<UMLCLassifier> classes
+operation + UMLClass createClass(name:String)
+operation + UMLClassifier classifierForName(name:String)
+}
+
+class UMLClassifier {
+operation + null UMLClassifier(name:String)
+operation + boolean isUserDefined()
+}
+
+class UMLClass {
+attribute + List<UMLAttributes> attributes
+operation + boolean addAttribute(attr:UMLAttribute)
+operation + int getAttrPosition(attr:UMLAttribute)
+} 
+
+relation ClassDiagram association UMLClassifier
+relation UMLClass association UMLAttribute
+relation UMLAttribute association UMLClassifier
+relation UMLClass generalization UMLClassifier
+relation UMLAttribute generalization Element
+relation UMLClassifier generalization Element
+relation ClassDiagram generalization Element
+
+@enduml
+relation generalization 
+relation aggregation 
+relation composition

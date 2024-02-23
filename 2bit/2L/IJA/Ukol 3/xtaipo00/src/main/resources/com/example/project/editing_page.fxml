@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="950.0" style="-fx-background-color: #BABABA;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.EditingController">
+   <children>
+      <AnchorPane prefHeight="650.0" prefWidth="146.0" style="-fx-background-color: #535353;">
+         <children>
+            <Button fx:id="homeButton" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToMain" prefHeight="31.0" prefWidth="115.0" style="-fx-background-color: #202020;" text="Home" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="addDiagramButton" layoutX="15.0" layoutY="52.0" mnemonicParsing="false" onAction="#addDiagram" prefHeight="31.0" prefWidth="115.0" style="-fx-background-color: #202020;" text="Add diagram" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="MainPane" layoutX="146.0" prefHeight="650.0" prefWidth="807.0" style="-fx-background-color: #fafafa;" />
+   </children>
+</AnchorPane>
