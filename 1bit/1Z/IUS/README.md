@@ -1,0 +1,10 @@
+# Zadání projektu IUS(Úvod do softwarového inženýrství) - Model informačního systému
+
+
+První částí projektu je vypracovat model případů užití. Diagram případů užití by měl být na jednu stranu formátu A4, měl by obsahovat více než jednoho aktéra a sadu případů užití. Případy užití volte dostatečně rozdílné, aby bylo poznat, že modelu a jeho smyslu rozumíte. V případě použití include/extend relací si dejte pozor na jejich správnou aplikaci.
+
+Druhou částí projektu je vypracování ER diagramu, ten také slouží pro prezentaci požadavků definovaných zákazníkem. Pomocí ER diagramu se modelují perzistentní data a vztahy mezi nimi. Jedná se o vyšší úroveň dat (abstrakci), která jsou v systému uložena a mohou být dále zpracovávána.
+
+
+# 33. Realitní kancelář
+Vaším úkolem je vývoj informačního systému realitní kanceláře, která zprostředkovává prodej nemovitostí různých kategorií (byty, rodinné domy, kanceláře, ...). Systém musí umožňovat prezentaci na webu s možností vyhledávání na základě různých kritérií. Musí evidovat potenciální zájemce, kteří si hodlají nemovitost prohlédnout, jejich nabídky (nejde-li o předem stanovenou cenu), a samozřejmě konečného kupce společně se smlouvou. Systém musí evidovat stavy smlouvy od nabídky (vyjádření zájmu/nabídka ceny) až po uzavření a zaplacení. Počítejte s tím, že jedna nemovitost může být realitní kanceláří prodána vícekrát, pokaždé jiným klientem, přičemž si samozřejmě chceme uchovat informaci o všech těchto prodejích. Z webu je možné zadávat dotazy k jednotlivým nemovitostem. Tyto dotazy jsou (spolu s údaji pro kontaktování tazatele) uloženy do databáze. Bylo by vhodné, kdyby zájem o prohlídku, nabídka (vyjádření zájmu o) či dotaz k nemovitosti mohl zadat jak klient, který se pouze zaregistroval z internetu, tak i zákazník, který již má v systému zřízen řádný účet (tento je typicky zřízen při přidání nemovitosti k prodeji či zakoupení nějaké nemovitosti). Je samozřejmé, že ve smlouvě nemůže figurovat zákazník, který se zatím pouze zaregistroval z WWW - tedy o něm víme např. pouze jeho email.
