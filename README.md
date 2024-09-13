@@ -1,4 +1,4 @@
-# VUT-fit
+# Vysoké učení technické v Brně Fakulta informačních technologií 
 
 # Seznam předmětů
 
