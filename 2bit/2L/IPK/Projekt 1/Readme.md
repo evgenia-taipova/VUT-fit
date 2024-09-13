@@ -1,7 +1,13 @@
-# IPK - Projekt 1
+# IPK (Počítačové komunikace a sítě) - Projekt 1
 **Author: Taipova Evgeniya - xtaipo00**
 
 **Datum: 10.3.2022**
+
+## Hodnocení
+
+
+| Body celkem | 17 z 20 |
+|-------------|---------|
 
 ## Popis
 Server v jazyce C komunikující prostřednictvím protokolu HTTP a poskytuje různé informace o systému. Server naslouchá na zadaném portu a podle url vrací požadované informace. Server správně pracovává hlavičky HTTP a generuje správné HTTP odpovědi. Server je spustitelný v prostředí Linux Ubuntu 20.04 LTS.
