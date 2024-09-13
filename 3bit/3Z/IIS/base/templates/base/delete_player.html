@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    {% if player.login == request.user.username or request.user.is_superuser is True %} 
+
+        <form method="POST" action="">
+            {% csrf_token %}
+            <p>Are you sure you want to delete {{player}}?</p>
+            <a href="{{request.META.HTTP_REFERER}}">go back</a>
+            <input type="submit" value="Confirm" name = "delete_confirm" />
+        </form>
+
+    {% else %}
+        <p><font color="#ff0000">You are not allowed to delete this player!</font></p>
+    {% endif %}
+
+{% endblock content %}

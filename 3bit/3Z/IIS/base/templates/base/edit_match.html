@@ -1,0 +1,45 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    <h2><b>Edit Page</b></h2>
+    
+    {% if error %}
+        <font color="#ff0000"> {{ error }} </font>
+    {% endif %}
+
+    {% if request.user.username == match.tournament.tournament_creator.login or request.user.is_superuser is True %}  
+        
+        <form method="POST" action="">
+            {% if match.tournament.tournament_type == 'teams' %}
+            
+                {% csrf_token %}
+                <p>Team first: {{form.team_first}}</p>
+                <p>Team second: {{form.team_second}}</p>
+                <p>Match date: {{form.match_date}}</p>
+                <p>Match time: {{form.match_time}}</p>
+                <p>Score first: {{form.score_first}}</p>
+                <p>Score second: {{form.score_second}}</p>
+                <p>Status:{{form.status}}</p>
+            
+            {% elif match.tournament.tournament_type == 'players'%}
+
+                {% csrf_token %}
+                <p>Player first: {{form.player_first}}</p>
+                <p>Player second: {{form.player_second}}</p>
+                <p>Match date: {{form.match_date}}</p>
+                <p>Match time: {{form.match_time}}</p>
+                <p>Score first: {{form.score_first}}</p>
+                <p>Score second: {{form.score_second}}</p>
+                <p>Status:{{form.status}}</p>
+
+            {% endif%}
+    
+            <input type="submit" value="Save" />
+        </form>
+
+    {% else %}
+        <p><font color="#ff0000">You are not allowed to edit this match!</font></p>
+    {% endif %}
+    
+{% endblock content %}

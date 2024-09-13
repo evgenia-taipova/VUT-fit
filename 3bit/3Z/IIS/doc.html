@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0070)https://www.fit.vutbr.cz/study/courses/IIS/private/projekt/doc.html.cs -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Dokumentácia projektu IIS</title>
+    <style type="text/css">
+    	table { border-collapse: collapse; }
+    	td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+    	dt { font-weight: bold; margin-top: 0.5em; }
+			code { background-color: #bfee94;  }
+    </style>
+</head>
+<body>
+
+<!-- Zkontrolujte prosím nastavení kódování v hlavičce dokumentu 
+     podle použitého editoru -->
+
+<h1>Studentské turnaje</h1> <!-- Nahradte názvem svého zadání -->
+
+<dl>
+	<dt>Autoři</dt>
+	<dd>Vladyslav Kovalets <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+		<a href="mailto:xkoval21@stud.fit.vutbr.cz">xkoval21@stud.fit.vutbr.cz</a> - <b>45%</b> projektu: připojení k databázi a serveru, front-end a back-end, 
+		dokumentace, video</dd>
+	  
+	</dd>
+	<dd>Evgeniya Taipova <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+		<a href="mailto:xtaipo00@stud.fit.vutbr.cz">xtaipo00@stud.fit.vutbr.cz</a> - <b>45%</b> projektu: připojení k databázi a serveru, front-end a back-end, 
+		dokumentace, video
+	  
+	</dd>
+	<dd> Andrei Sartin  <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+	    <a href="mailto:xsarti00@stud.fit.vutbr.cz">xsarti00@stud.fit.vutbr.cz</a> - <b>10%</b> projektu: automatické odhlášení, logo, pár vztahů mezi modely, autentizace.
+	</dd>
+	<dt>URL aplikace</dt>
+	<dd><a href="https://xkoval21.pythonanywhere.com/">https://xkoval21.pythonanywhere.com/</a></dd>
+</dl>
+
+<h2>Uživatelé systému pro testování</h2>
+<table>
+<tbody><tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
+<tr><td>xadmin00</td><td>xadmin00</td><td>Admin</td></tr>
+<tr><td>team_creator</td><td>Your_password</td><td>Team Creator,
+	Tournament Participant</td></tr>
+<tr><td>user123</td><td>This password</td><td>Team Member</td></tr>
+<tr><td>tournament_creator</td><td>Your_password</td><td>Tournament Creator</td></tr>
+<tr><td>-</td><td>-</td><td>Unregistered user</td></tr>
+</tbody></table>
+
+<h3>Video</h3>
+
+<a href="https://drive.google.com/file/d/1uzFsPxHIl001u37ls3dwVdsDof6OSbQl/view?usp=share_link">Link na video</a>
+<p></p>
+Automatické odhlášení po určité době nečinnosti – 5 minut. Ve videu jsme to zapomněli zmínit.
+
+
+<h2>Implementace</h2>
+
+<p>Jako implementační jazyk jsme použili Python3.8 (framework Django).
+	Django jako webový framework využívá ke své práci architekturu MODEL VIEW TEMPLATE a navrhuje rozdělit vše do „vrstev“:
+	<li><b>models.py</b> je datová vrstva a způsob, jakým ji ukládáme do databáze.
+		Byly vytvořeny modely hráčů, týmů, turnajů a zápasů.</li>
+	<li><b>views.py</b> shromažďuje všechna data potřebná k vytváření webových stránek nebo zpracování dat odeslaných prostřednictvím formulářů.</li>
+	<li>složka <b>templates</b> obsahuje html soubory, které přijímají data z views.py a zobrazují je na webové stránce.</li>
+	<li><b>urls.py</b> organizuje práci odkazů na webu, na který odkaz vytvořit jaký druh a jakou šablonu.</li>
+	<li><b>forms.py</b> pomáhá vytvářet a zpracovávat webové formuláře pro data od uživatelů.</li>
+	<p>Django poskytuje nástroje pro vytváření těchto vrstev a funkcí programu je sdílet data mezi vrstvami.</p>
+
+<h3>Databáze</h3>
+<p>Jako relační databázi používáme MySQL hostovanou na našem serveru.</p>
+
+<img src="iiser.png" style="width: 1400px;"></img>
+
+<h2>Instalace</h2>
+
+<p>Jako server jsme použili PythonAnywhere.</p>
+<p>Softwarové pozadavky: Python 3.10, Django 4.1.1, MySQL.</p>
+<li><code>pip install django django-session-timeout</code></li>
+<li><code>pip install django-session-timeout</code></li>
+<li><code>pip install Pillow</code></li>
+<li><code>pip install mysqlclient</code></li>
+
+<p>Spuštění:</p>
+<li><code>unzip xkoval21.zip</code></li>
+<p>Vytvoříte MySQL databázi s těmito nastaveními:</p>
+<p>Host='127.0.0.1'</p>
+<p>Port='3306'</p>
+<p>Database='iis'</p>
+<p>User='root'</p>
+<p>Password='xkoval21'</p>
+<p>Spustíte skript <b>script.sql</b> v MySQL databázi.</p>
+<li><code>python3 manage.py migrate --run-syncdb</code></li>
+<li><code>python3 manage.py runserver</code></li>
+<li>Stránka se nachází na adrese <a href="http://127.0.0.1:8000/">127.0.0.1:8000</a></li>
+
+<div class="mallbery-caa" style="z-index: 2147483647 !important; text-transform: none !important; position: fixed;"></div></body><div id="sm-wrapper"></div></html>

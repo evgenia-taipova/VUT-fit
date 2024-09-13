@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    <h2>Participants under consideration for {{tournament.tournament_name}}</h2>
+    
+    <form method="POST" action="">
+        {% csrf_token %} 
+        {% for player in players %}
+            <li><a href="{% url 'user' player.login %}">{{player.login}}</a>
+            <input type="submit" name="approve {{player.login}}" value="Approve">
+            <input type="submit" name="decline {{player.login}}" value="Decline"></li>
+        {% endfor %} 
+
+        
+        {% for team in teams %}
+            <li><a href="{% url 'team' team.team_name %}">{{team.team_name}}</a>
+            <input type="submit" name="approve {{team.team_name}}" value="Approve">
+            <input type="submit" name="decline {{team.team_name}}" value="Decline"></li>
+        {% endfor %} 
+    </form>
+    
+{% endblock content %}

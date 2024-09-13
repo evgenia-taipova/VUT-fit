@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    <h1>Created tournaments:</h1>
+    
+    <h3>Approved tournaments:</h3>
+    
+    {% for tournament in tournaments %}
+        {% if tournament.tournament_approved is True %}
+            <h3><li><a href="{% url 'tournament' tournament.id_tournament %}">{{tournament}}</a></li><h3> 
+        {% endif %}
+    {% endfor %} 
+                
+    
+    <h3>Under consideration:</h3>
+    
+    {% for tournament in tournaments %}
+        {% if tournament.tournament_approved is False%}
+            <h3><li><a href="{% url 'tournament' tournament.id_tournament %}">{{tournament}}</a></li><h3>
+        {% endif %}
+    {% endfor %} 
+
+{% endblock content %}

@@ -1,0 +1,44 @@
+name: itu_dev
+description: A new Flutter project.
+publish_to: 'none'
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.4 <4.0.0'
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  mvc_pattern: ^8.12.0
+  sqflite: ^2.3.0
+  flutter_local_notifications: ^16.1.0
+  intl: ^0.17.0
+  shared_preferences: ^2.0.7
+  fl_chart: ^0.40.0
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  path_provider: ^2.1.1
+
+
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - images/balance.png
+    - images/home.png
+    - images/debt.png
+    - images/goal.png
+    - images/tips.png
+  fonts:
+    - family: MiriamLibre
+      fonts:
+        - asset: fonts/MiriamLibre-Regular.ttf
+        - asset: fonts/MiriamLibre-Bold.ttf

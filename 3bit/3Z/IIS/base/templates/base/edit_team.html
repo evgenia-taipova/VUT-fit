@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    {% if team.team_captain.login == request.user.username %} 
+
+        <h1>Edit team page</h1>
+
+        <div>
+
+            <form method="POST" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.as_p}}
+                
+                <input type="submit" value="Submit" name="edit" />
+                <p></p>
+                
+                <form>
+                    <button formaction="{% url 'delete_team' team.team_name %}">Delete team</button>
+                </form> 
+
+            </form>
+
+        </div>
+
+    {% else %}
+        
+        <p><font color="#ff0000">You are not allowed to edit this team!</font></p>
+
+    {% endif %}
+
+{% endblock content %}

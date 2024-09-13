@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    {% if team.team_captain.login == request.user.username %} 
+
+        <form method="POST" action="">
+            {% csrf_token %}
+            <p>Are you sure you want to delete {{team}} ?</p>
+            <a href="{{request.META.HTTP_REFERER}}">go back</a>
+            <input type="submit" value="Confirm" name = "delete_confirm" />
+        </form>
+
+    {% else %}
+        {{team.team_captain}} is not your team
+        {{request.user.username}}
+        <p><font color="#ff0000">You are not allowed to delete this team!</font></p>
+    {% endif %}
+
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    {% if request.user.is_superuser is True %}
+        <h1>Tournaments for approval</h1>
+
+        {% if tournaments %}
+            {% for tournament in tournaments %}
+                {% if tournament.tournament_approved is False %}
+                    <li><a href="{% url 'tournament' tournament.id_tournament %}">{{tournament.tournament_name}}</a></li>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+    {% else %}
+        <p><font color="#ff0000">You are not allowed to approval tournament!</font></p>
+    {% endif %}
+
+{% endblock content %}

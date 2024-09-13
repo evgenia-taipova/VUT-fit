@@ -1,0 +1,61 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    
+    <h2><b>{{ match.tournament }}</b></h2>
+    <a href="{% url 'schedule' match.tournament.id_tournament %}">Back to schedule</a>
+    {% if match.tournament.tournament_type == 'teams'%}
+
+        {% if match.team_first is None%}
+            <p>waiting
+        {%else%}
+            <p><a href="{% url 'team' match.team_first %}">{{ match.team_first }}</a>
+        {% endif %}
+        
+        <b> VS</b>
+
+        {% if match.team_second is None%}
+            waiting
+        {%else%}
+            <a href="{% url 'team'  match.team_second %}">{{ match.team_second }}</a></p>
+        {% endif %}
+         
+    {% elif match.tournament.tournament_type == 'players' %}
+   
+        {% if match.player_first is None%}
+            <p>waiting
+        {%else%}
+            <p><a href="{% url 'user' match.player_first %}">{{ match.player_first }}</a>
+        {% endif %}
+        
+        <b> VS</b>
+
+        {% if match.player_second is None%}
+            waiting
+        {%else%}
+            <a href="{% url 'user'  match.player_second %}">{{ match.player_second }}</a></p>
+        {% endif %}
+
+
+    {% endif %}
+    
+    {% if match.match_date != None %}
+        <p><b>Match date:</b> {{ match.match_date }}</p>
+    {% endif %}
+    
+    {% if match.match_time != None %}
+        <p><b>Match time:</b> {{ match.match_time }}</p>
+    {% endif %}
+    
+  
+    {% if match.status == 'finished' %}
+        <p><b>{{ match.score_first }} : {{match.score_second}}</b></p>
+    {% endif %}
+    <p><b>Status:</b> {{ match.status }}</p>
+
+    {% if request.user.username == match.tournament.tournament_creator.login or request.user.is_superuser is True %}  
+        <input type="submit" value="Edit" onclick="location.href='{% url 'edit_match' match.id_match %}'">
+    {% endif%}
+
+    
+{% endblock content %}

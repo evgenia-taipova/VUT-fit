@@ -1,0 +1,36 @@
+<a href="/">
+    <img src="/images/logo.png" title="home"/>
+</a>
+
+{% if request.user.is_authenticated %}  
+    {% if request.user.is_superuser is True %}
+        <p>Hello, {{request.user}} (admin) </a>
+            <p align="left">
+                <a href="{% url 'tournaments_approval' %}">Tournaments for approval</a> 
+            </p>
+        <p align="right">
+            <a href="{% url 'logout' %}">Logout</a>
+        </p>
+    {% else %}
+        <p>Hello, <a href="{% url 'user' request.user %}">{{request.user}}</a>
+        </p>
+        <p align="left">
+        <a href="{% url 'my_teams' %}">My teams</a> 
+        <a href="{% url 'my_tournaments' %}">My tournaments</a>
+        <a href="{% url 'my_matches' %}">My matches</a>
+        <a href="{% url 'created_tournaments' %}">Created tournaments</a>
+        </p>
+        <p align="right">
+            <a href="{% url 'edit_profile' request.user.username %}">Edit profile</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </p>
+    {% endif %}
+
+{% else %}
+    <p align="right">
+        <a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Sign up</a>
+    </p>
+{% endif %}
+
+<hr>
+

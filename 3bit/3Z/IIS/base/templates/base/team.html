@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+{% if team %}
+    <h2><b>Team: {{ team.team_name }}</b></h2>
+
+    {% if team.logo_image %}
+            <img src="{{ team.logo_image.url }}" width=100>
+        {% endif %}
+
+    <p><b>Captain:</b> <a href="{% url 'user' team.team_captain %}">{{team.team_captain}}</a> </p>
+
+    <p><b>Members:</b>
+    {% for member in team_members %}
+        <li><a href="{% url 'user' member %}">{{member}}</a></li>
+    {% endfor %} 
+
+    <p><b>Statistics:</b></p>
+    <p><b>Played:</b> {{ team.number_of_matches }}</p>
+    <p><b>Won:</b> {{ team.wins }}</p>
+    <p><b>Lost:</b> {{ team.losses }}</p>
+        
+    <p></p>
+
+    {% if request.user.username == team.team_captain.login%}
+        <form>
+            <button formaction="{% url 'edit_team' team.team_name %}">Edit team</button>
+        </form>
+    {% endif %}
+    
+
+{% endif %}
+
+
+
+
+{% endblock content %}

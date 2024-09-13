@@ -1,0 +1,172 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    {% if tournament %}
+    
+        <h2><b>Tournament: {{ tournament.tournament_name }}</b></h2>
+        <div>
+        {% if error %}
+            <font color="#ff0000"> {{ error }} </font>
+        {% endif %}
+        {% if tournament.tournament_status == 'scheduled' or tournament.tournament_status == 'active' or tournament.tournament_status == 'finished' %}
+        <h3><a href="{% url 'schedule' tournament.id_tournament %}">Schedule for the tournament</a></h3>
+        {% endif %}
+        {% if request.user.username == tournament.tournament_creator.login %}
+            {% if tournament.tournament_status == 'registration' or tournament.tournament_status == 'not_schedule' %}
+            <a href="{% url 'participants_approval' tournament.id_tournament %}">Participants for approval</a>
+            {% endif %}
+        {% endif %}
+
+
+        <p><b>Registration is open until:</b> {{tournament.tournament_date_registration}}</p> 
+        <p><b>Starts on:</b> {{tournament.tournament_date_start}}</p> 
+        <p><b>Ends on:</b> {{tournament.tournament_date_end}}</p> 
+
+        {% if tournament.tournament_description %}
+            <p><b>Description:</b> {{tournament.tournament_description}}</p> 
+        {% endif %}
+        
+        {% if tournament.tournament_prize %}
+            <p><b>Prize:</b> {{tournament.tournament_prize}}</p> 
+        {% endif %}
+
+        {% if tournament.tournament_winner_team%}
+            <p><b>Winner Team:</b><a href="{% url 'user' tournament.tournament_winner_team %}">{{tournament.tournament_winner_team}}</a> </p>
+        {% endif %}
+        
+        {% if tournament.tournament_winner_player %}
+            <p><b>Winner Player: </b> <a href="{% url 'user' tournament.tournament_winner_player %}">{{tournament.tournament_winner_player}}</a>
+        {% endif %}
+        
+        <p><b>Creator:</b> 
+            <a href="{% url 'user' tournament.tournament_creator.login %}">
+                {{tournament.tournament_creator.login}}</a></p> 
+        
+        
+        {% if players %}
+            <p><b>Players:</b>
+            {% for player in players %}
+                <li><a href="{% url 'user' player.login %}">{{player.login}}</a></li>
+                
+            {% endfor %} 
+        {% endif %} 
+
+        {% if teams %}
+            <p><b>Teams:</b>
+            {% for team in teams %}
+                <li><a href="{% url 'team' team.team_name %}">{{team.team_name}}</a></li>
+            {% endfor %} 
+        {% endif %} 
+
+        {% if tournament.tournament_type == 'players' %}
+            <p><b>Number of players:</b> {{tournament.tournament_number_of_players}}</p> 
+        {% else %}
+            <p><b>Number of teams:</b> {{tournament.tournament_number_of_teams}}</p>
+        {% endif %}
+        
+
+        </div> 
+    {% endif %}
+
+        {% if request.user.username == tournament.tournament_creator.login %}
+            <form>
+                {% if tournament.tournament_status == 'not_schedule' %}
+                    {% if tournament.tournament_number_of_players == participants_count or tournament.tournament_number_of_teams == participants_count %}
+                    <div>  
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            <button formaction="{% url 'run' tournament.id_tournament %}">Create schedule</button>
+                        </form>
+                    </div>
+                    {% endif %}
+                {% endif %}
+                <p></p>
+            </form>
+
+        {% endif %}
+            
+
+
+        {% if request.user.is_superuser is True %}
+            
+            {% if tournament.tournament_approved is False %}
+            <div>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                
+                    <input type="submit" value="Approve" name='approve'/>
+                    <input type="submit" value="Decline" name='decline'/>
+                </form>
+            </div>
+            {% endif %}
+
+        {% elif request.user.is_authenticated %}
+            {% if tournament.tournament_approved is True %}
+                {% if tournament.tournament_type == "players" %}
+
+                    {% if is_waiting is True%}
+
+                    <p><font color="#ff5090"><b>You are under consideration!</b></p>
+                    
+                    {% elif is_player is False %}
+                        {% if tournament.tournament_status == 'registration' or tournament.tournament_status == 'not_schedule'%}
+                            <div>
+                                <form method="POST" action="">
+                                    {% csrf_token %}
+                                    <p> <input type="submit" value="Join the tournament!" name='join_player'/></p>
+                                </form>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        {% if tournament.tournament_status == 'registration'%}
+                            <div>
+                                <form method="POST" action="">
+                                    {% csrf_token %}
+                                    <input type="submit" value="Leave the tournament!" name='leave_player'/>
+                                </form>
+                            </div>
+                        {% endif %} 
+                    {% endif %}
+
+                {% elif tournament.tournament_type == "teams" %}
+
+                    {% if is_captain is True %}
+                        {% if is_waiting is True%}
+
+                        <p><font color="#ff5090"><b>Your team is under consideration!</b></p>
+
+                        {% elif is_captain_team is False %}
+                            {% if tournament.tournament_status == 'registration' or tournament.tournament_status == 'not_schedule' %}
+                            <div>
+                                <form method="POST" action="">
+                                    {% csrf_token %}
+                                    <p> 
+
+                                    <select name = "select_team"> 
+                                    {% for team in teams_capitan %}
+                                        <option value = {{team.team_name}} >{{team.team_name}}</option>
+                                    {% endfor %}
+                                    </select>
+                                    <input type="submit" value="Join the tournament with the team!" name='join_team'/>
+
+                                    </p>
+                                    
+                                </form>
+                            </div>
+                            {% endif %}
+                        {% else %}
+                            {% if tournament.tournament_status == 'registration'%}
+                            <div>
+                                <form method="POST" action="">
+                                    {% csrf_token %}
+                                    <input type="submit" value="Leave the tournament with the team!" name='leave_team'/>
+                                </form>
+                            </div> 
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        {% endif %}
+{% endblock content %}

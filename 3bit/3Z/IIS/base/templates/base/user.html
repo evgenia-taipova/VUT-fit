@@ -1,0 +1,52 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    {% if player %}
+        <h2>Player: {{ player.login }}</h2>
+        <div>
+            {% if player.name%}
+                <p><b>Name:</b> {{player.name}}</p> 
+            {% endif %}
+        
+            {% if player.surname %}
+                <p><b>Surname:</b> {{player.surname}}</p> 
+            {% endif %}
+            
+            {% if age %}
+                <p><b>Age:</b> {{age}}</p> 
+            {% endif %}
+
+            {% if player.email%}
+                <p><b>E-mail:</b> {{player.email}}</p>
+            {% endif %}
+        
+            {% if player.height %}
+                <p><b>Height (cm): </b> {{player.height}}
+            {% endif %}
+        
+            {% if player.weight %}
+                <p><b>Weight (kg): </b> {{player.weight}}
+            {% endif %} 
+        
+            {% if player.studies_year %}
+                <p><b>Year of study: </b>{{player.studies_year}}
+            {% endif %} 
+
+            <p><b> Statistics: </b></p>
+            <p>Played: {{player.number_of_matches}}</p>
+            <p>Won: {{player.wins}}</p>
+            <p>Lost: {{player.losses}}</p>
+            <p>Winrate: {{player.winrate}}%</p>
+
+        </div> 
+    {% endif %}
+
+    {% if request.user.is_superuser is True %}
+        <form>
+            <button formaction="{% url 'edit_profile' player.login %}">Edit user profile</button>
+            <button formaction="{% url 'delete_player' player %}">Delete account</button>
+        </form>
+    {% endif %} 
+
+{% endblock content %}

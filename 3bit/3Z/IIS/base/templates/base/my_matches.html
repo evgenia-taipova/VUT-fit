@@ -1,0 +1,37 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <h1>My matches</h1>
+
+    {% if not matches%}
+        
+        <h3>You are not participating in any matches.</h3>
+    {% endif %}    
+
+    <h3>Upcoming matches:</h3>
+
+    {% for match in matches %}
+        {% if match.status == 'pending' %}
+            {% if match.tournament.tournament_type == 'players' %}
+                <li><a href="{% url 'match' match.id_match %}">{{match.tournament}} : {{match.player_first}} vs {{match.player_second}}</a></li>
+            {% elif match.tournament.tournament_type == 'teams' %}
+                <li><a href="{% url 'match' match.id_match %}">{{match.tournament}} : {{match.team_first}} vs {{match.team_second}}</a></li>
+            {% endif %}
+        {% endif %}
+    {% endfor %} 
+
+    <h3>Past matches:</h3>
+
+    {% for match in matches %}
+
+        {% if match.status == 'finished' %}
+            {% if match.tournament.tournament_type == 'players' %}
+                <li><a href="{% url 'match' match.id_match %}">{{match.tournament}} : {{match.player_first}} vs {{match.player_second}}</a></li>
+            {% elif match.tournament.tournament_type == 'teams' %}
+                <li><a href="{% url 'match' match.id_match %}">{{match.tournament}} : {{match.team_first}} vs {{match.team_second}}</a></li>
+            {% endif %}
+        {% endif %}
+        
+    {% endfor %} 
+
+{% endblock content %}

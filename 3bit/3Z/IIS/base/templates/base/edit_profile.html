@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <h1>Edit profile page</h1>
+
+    <div>
+
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{form.as_p}}
+            
+            <input type="submit" value="Submit" name="edit" />
+            <p></p>
+            
+            <form>
+                <button formaction="{% url 'delete_player' player %}">Delete account</button>
+            </form>
+
+        </form>
+
+    </div>
+
+{% endblock content %}

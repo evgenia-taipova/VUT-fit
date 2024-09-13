@@ -1,0 +1,49 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<main>
+
+    <body>
+        <h1>Student tournaments</h1>
+            
+        {% if request.user.is_authenticated and request.user.is_superuser is False%}
+            <div>
+                <a href="{% url 'create_team' %}">Create Team</a>
+                <a href="{% url 'create_tournament' %}">Create Tournament</a>
+            </div>
+        {% endif %}
+
+        {% if players %}
+            <h3>Players:</h3>
+            {% for player in players %}
+                <li><a href="{% url 'user' player.login %}">{{player.login}}</a></li>
+            {% endfor %}
+        {% endif %}
+
+        {% if teams %}
+            <h3>Teams:</h3>
+            {% for team in teams %}
+                <li><a href="{% url 'team' team.team_name %}">{{team.team_name}}</a></li>
+            {% endfor %}
+        {% endif %}
+
+        {% if tournaments %}
+            <h3>Tournaments:</h3>
+            {% for tournament in tournaments %}
+                {% if tournament.tournament_approved is True %}
+                    <li><a href="{% url 'tournament' tournament.id_tournament %}">{{tournament.tournament_name}}</a></li>
+                    
+                {% endif %}
+            {% endfor %}
+
+            {% if tournament_count is 0 %}
+                <p>There are no approved tournaments</p>
+            {% endif %}
+
+        {% endif %}
+
+    </body>
+
+</main>
+
+{% endblock content %}

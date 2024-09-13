@@ -1,0 +1,704 @@
+{% extends 'main.html' %}
+{% comment %} The code base was taken from here: https://codepen.io/aronduby/pen/DRJrJN {% endcomment %}
+
+{% block content %}
+    <h1> Schedule for {{tournament.tournament_name}} </h1>
+    <main id="tournament">
+            
+    {% if tournament_type == 'players' %}
+        
+        {% if teams_count is 2 %}
+
+            <ul class="round round-1">
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top "> <a href="{% url 'user' matches.0.player_first %}">{{matches.0.player_first}}</a> <span>{{matches.0.score_first}}</span></li>
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.0 %}">{{matches.0.ordinal_number}}</a>&nbsp;</h2></li>
+            <li class="game game-bottom "> <a href="{% url 'user' matches.0.player_second %}">{{matches.0.player_second}}</a><span> {{matches.0.score_second}}</span></li>
+            </ul>
+
+        {% elif teams_count is 4%}
+
+            <ul class="round round-1">
+            <li class="spacer">&nbsp;</li>
+
+            <li class="game game-top "> <a href="{% url 'user' matches.0.player_first %}">{{matches.0.player_first}}</a> <span>{{matches.0.score_first}}</span></li>
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.0 %}">{{matches.0.ordinal_number}}</a>&nbsp;</h2></li>
+            <li class="game game-bottom "><a href="{% url 'user' matches.0.player_second %}">{{matches.0.player_second}}</a><span>{{matches.0.score_second}}</span></li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top "><a href="{% url 'user' matches.1.player_first %}">{{matches.1.player_first}}</a><span>{{matches.1.score_first}}</span></li>
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.1 %}">{{matches.1.ordinal_number}}</a>&nbsp;</h2></li>
+            <li class="game game-bottom "> <a href="{% url 'user' matches.1.player_second %}">{{matches.1.player_second}}</a><span>{{matches.1.score_second}}</span></li>
+            <li class="spacer">&nbsp;</li>
+            </ul>
+
+
+            <ul class="round round-2">
+
+            <li class="spacer">&nbsp;</li>
+            
+            {% if matches.2.player_first is None %}   
+                <li class="game game-top "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-top "><a href="{% url 'user' matches.2.player_first %}">{{matches.2.player_first}}</a><span>{{matches.2.score_first}}</span></li>
+            {% endif %}
+
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.2 %}">{{matches.2.ordinal_number}}</a>&nbsp;</h2></li>
+                
+            {% if matches.2.player_second is None %}   
+                <li class="game game-bottom "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-bottom "><a href="{% url 'user' matches.2.player_second %}">{{matches.2.player_second}}</a><span>{{matches.2.score_second}}</span></li>
+            {% endif %}
+                
+
+            <li class="spacer">&nbsp;</li>
+            </ul>
+
+
+            {% elif teams_count is 8 %}
+                <ul class="round round-1">
+                <li class="spacer">&nbsp;</li>
+                
+                <li class="game game-top "> <a href="{% url 'user' matches.0.player_first %}">{{matches.0.player_first}}</a> <span>{{matches.0.score_first}}</span></li>
+                <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.0 %}">{{matches.0.ordinal_number}}</a>&nbsp;</h2></li>
+                <li class="game game-bottom "> <a href="{% url 'user' matches.0.player_second %}">{{matches.0.player_second}}</a><span>{{matches.0.score_second}}</span></li>
+
+                <li class="spacer">&nbsp;</li>
+                
+                <li class="game game-top "><a href="{% url 'user' matches.1.player_first %}">{{matches.1.player_first}}</a><span>{{matches.1.score_first}}</span></li>
+                <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.1 %}">{{matches.1.ordinal_number}}</a>&nbsp;</h2></li>
+                <li class="game game-bottom "><a href="{% url 'user' matches.1.player_second %}">{{matches.1.player_second}}</a><span>{{matches.1.score_second}}</span></li>
+
+                <li class="spacer">&nbsp;</li>
+
+                <li class="game game-top "><a href="{% url 'user' matches.2.player_first %}">{{matches.2.player_first}}</a><span>{{matches.2.score_first}}</span></li>
+                <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.2 %}">{{matches.2.ordinal_number}}</a>&nbsp;</h2></li>
+                <li class="game game-bottom "> <a href="{% url 'user' matches.2.player_second %}">{{matches.2.player_second}}</a><span>{{matches.2.score_second}}</span></li>
+                
+                <li class="spacer">&nbsp;</li>
+
+                <li class="game game-top "><a href="{% url 'user' matches.3.player_first %}">{{matches.3.player_first}}</a><span>{{matches.3.score_first}}</span></li>
+                <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.3 %}">{{matches.3.ordinal_number}}</a>&nbsp;</h2></li>
+                <li class="game game-bottom "><a href="{% url 'user' matches.3.player_second %}">{{matches.3.player_second}}</a><span>{{matches.3.score_second}}</span></li>
+                
+                <li class="spacer">&nbsp;</li>
+                </ul>
+
+
+                <ul class="round round-2">
+
+                <li class="spacer">&nbsp;</li>
+
+
+            {% if matches.4.player_first is None %}   
+                <li class="game game-top "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-top "><a href="{% url 'user' matches.4.player_first %}">{{matches.4.player_first}}</a><span>{{matches.4.score_first}}</span></li>
+            {% endif %}
+
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.4 %}">{{matches.4.ordinal_number}}</a>&nbsp;</h2></li>
+                
+            {% if matches.4.player_second is None %}   
+                <li class="game game-bottom "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-bottom "><a href="{% url 'user' matches.4.player_second %}">{{matches.4.player_second}}</a><span>{{matches.4.score_second}}</span></li>
+            {% endif %}
+
+            <li class="spacer">&nbsp;</li>
+
+            {% if matches.5.player_first is None %}   
+                <li class="game game-top "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-top "><a href="{% url 'user' matches.5.player_first %}">{{matches.5.player_first}}</a><span>{{matches.5.score_first}}</span></li>
+            {% endif %}
+
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.5 %}">{{matches.5.ordinal_number}}</a>&nbsp;</h2></li>
+                
+            {% if matches.5.player_second is None %}   
+                <li class="game game-bottom "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-bottom "><a href="{% url 'user' matches.5.player_second %}">{{matches.5.player_second}}</a><span>{{matches.5.score_second}}</span></li>
+            {% endif %}
+
+            
+            <li class="spacer">&nbsp;</li>
+            </ul>
+            
+            <ul class="round round-3">
+            <li class="spacer">&nbsp;</li>
+
+            {% if matches.6.player_first is None %}   
+                <li class="game game-top "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-top "><a href="{% url 'user' matches.6.player_first %}">{{matches.6.player_first}}</a><span>{{matches.6.score_first}}</span></li>
+            {% endif %}
+
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.6 %}">{{matches.6.ordinal_number}}</a>&nbsp;</h2></li>
+                
+            {% if matches.6.player_second is None %}   
+                <li class="game game-bottom "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-bottom "><a href="{% url 'user' matches.6.player_second %}">{{matches.6.player_second}}</a><span>{{matches.6.score_second}}</span></li>
+            {% endif %}
+        
+            <li class="spacer">&nbsp;</li>  
+            </ul>
+        
+
+        {% elif teams_count is 16 %}
+            <ul class="round round-1">
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top "> <a href="{% url 'user' matches.0.player_first %}">{{matches.0.player_first}}</a> <span>{{matches.0.score_first}}</span></li>
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.0 %}">{{matches.0.ordinal_number}}</a>&nbsp;</h2></li>
+            <li class="game game-bottom "> <a href="{% url 'user' matches.0.player_second %}">{{matches.0.player_second}}</a><span>{{matches.0.score_second}}</span></li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top "><a href="{% url 'user' matches.1.player_first %}">{{matches.1.player_first}}</a><span>{{matches.1.score_first}}</span></li>
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.1 %}">{{matches.1.ordinal_number}}</a>&nbsp;</h2></li>
+            <li class="game game-bottom "><a href="{% url 'user' matches.1.player_second %}">{{matches.1.player_second}}</a><span>{{matches.1.score_second}}</span></li>
+
+            <li class="spacer">&nbsp;</li>
+
+            <li class="game game-top "><a href="{% url 'user' matches.2.player_first %}">{{matches.2.player_first}}</a><span>{{matches.2.score_first}}</span></li>
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.2 %}">{{matches.2.ordinal_number}}</a>&nbsp;</h2></li>
+            <li class="game game-bottom "> <a href="{% url 'user' matches.2.player_second %}">{{matches.2.player_second}}</a><span>{{matches.2.score_second}}</span></li>
+            
+            <li class="spacer">&nbsp;</li>
+
+            <li class="game game-top "><a href="{% url 'user' matches.3.player_first %}">{{matches.3.player_first}}</a><span>{{matches.3.score_first}}</span></li>
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.3 %}">{{matches.3.ordinal_number}}</a>&nbsp;</h2></li>
+            <li class="game game-bottom "><a href="{% url 'user' matches.3.player_second %}">{{matches.3.player_second}}</a><span>{{matches.3.score_second}}</span></li>
+            
+            <li class="spacer">&nbsp;</li>
+
+            
+            <li class="game game-top "> <a href="{% url 'user' matches.4.player_first %}">{{matches.4.player_first}}</a> <span>{{matches.4.score_first}}</span></li>
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.4 %}">{{matches.4.ordinal_number}}</a>&nbsp;</h2></li>
+            <li class="game game-bottom "> <a href="{% url 'user' matches.4.player_second %}">{{matches.4.player_second}}</a><span>{{matches.4.score_second}}</span></li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top "><a href="{% url 'user' matches.5.player_first %}">{{matches.5.player_first}}</a><span>{{matches.5.score_first}}</span></li>
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.5 %}">{{matches.5.ordinal_number}}</a>&nbsp;</h2></li>
+            <li class="game game-bottom "><a href="{% url 'user' matches.5.player_second %}">{{matches.5.player_second}}</a><span>{{matches.5.score_second}}</span></li>
+
+            <li class="spacer">&nbsp;</li>
+
+            <li class="game game-top "><a href="{% url 'user' matches.6.player_first %}">{{matches.6.player_first}}</a><span>{{matches.6.score_first}}</span></li>
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.6 %}">{{matches.6.ordinal_number}}</a>&nbsp;</h2></li>
+            <li class="game game-bottom "> <a href="{% url 'user' matches.6.player_second %}">{{matches.6.player_second}}</a><span>{{matches.6.score_second}}</span></li>
+            
+            <li class="spacer">&nbsp;</li>
+
+            <li class="game game-top "><a href="{% url 'user' matches.7.player_first %}">{{matches.7.player_first}}</a><span>{{matches.7.score_first}}</span></li>
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.7 %}">{{matches.7.ordinal_number}}</a>&nbsp;</h2></li>
+            <li class="game game-bottom "><a href="{% url 'user' matches.7.player_second %}">{{matches.7.player_second}}</a><span>{{matches.7.score_second}}</span></li>
+            
+            <li class="spacer">&nbsp;</li>
+            </ul>
+
+
+            <ul class="round round-2">
+
+            <li class="spacer">&nbsp;</li>
+
+
+            {% if matches.8.player_first is None %}   
+                <li class="game game-top "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-top "><a href="{% url 'user' matches.8.player_first %}">{{matches.8.player_first}}</a><span>{{matches.8.score_first}}</span></li>
+            {% endif %}
+
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.8 %}">{{matches.8.ordinal_number}}</a>&nbsp;</h2></li>
+                
+            {% if matches.8.player_second is None %}   
+                <li class="game game-bottom "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-bottom "><a href="{% url 'user' matches.8.player_second %}">{{matches.8.player_second}}</a><span>{{matches.8.score_second}}</span></li>
+            {% endif %}
+
+            <li class="spacer">&nbsp;</li>
+
+            {% if matches.9.player_first is None %}   
+                <li class="game game-top "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-top "><a href="{% url 'user' matches.9.player_first %}">{{matches.9.player_first}}</a><span>{{matches.9.score_first}}</span></li>
+            {% endif %}
+
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.9 %}">{{matches.9.ordinal_number}}</a>&nbsp;</h2></li>
+                
+            {% if matches.9.player_second is None %}   
+                <li class="game game-bottom "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-bottom "><a href="{% url 'user' matches.9.player_second %}">{{matches.9.player_second}}</a><span>{{matches.9.score_second}}</span></li>
+            {% endif %}
+
+            
+            <li class="spacer">&nbsp;</li>
+
+            {% if matches.10.player_first is None %}   
+                <li class="game game-top "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-top "><a href="{% url 'user' matches.10.player_first %}">{{matches.10.player_first}}</a><span>{{matches.10.score_first}}</span></li>
+            {% endif %}
+
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.10 %}">{{matches.10.ordinal_number}}</a>&nbsp;</h2></li>
+                
+            {% if matches.10.player_second is None %}   
+                <li class="game game-bottom "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-bottom "><a href="{% url 'user' matches.10.player_second %}">{{matches.10.player_second}}</a><span>{{matches.10.score_second}}</span></li>
+            {% endif %}
+
+            <li class="spacer">&nbsp;</li>
+
+            {% if matches.11.player_first is None %}   
+                <li class="game game-top "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-top "><a href="{% url 'user' matches.11.player_first %}">{{matches.11.player_first}}</a><span>{{matches.11.score_first}}</span></li>
+            {% endif %}
+
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.11 %}">{{matches.11.ordinal_number}}</a>&nbsp;</h2></li>
+                
+            {% if matches.11.player_second is None %}   
+                <li class="game game-bottom "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-bottom "><a href="{% url 'user' matches.11.player_second %}">{{matches.11.player_second}}</a><span>{{matches.11.score_second}}</span></li>
+            {% endif %}
+
+            
+            <li class="spacer">&nbsp;</li>
+            </ul>
+            
+            <ul class="round round-3">
+            <li class="spacer">&nbsp;</li>
+
+            {% if matches.12.player_first is None %}   
+                <li class="game game-top "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-top "><a href="{% url 'user' matches.12.player_first %}">{{matches.12.player_first}}</a><span>{{matches.12.score_first}}</span></li>
+            {% endif %}
+
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.12 %}">{{matches.12.ordinal_number}}</a>&nbsp;</h2></li>
+                
+            {% if matches.12.player_second is None %}   
+                <li class="game game-bottom "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-bottom "><a href="{% url 'user' matches.12.player_second %}">{{matches.12.player_second}}</a><span>{{matches.12.score_second}}</span></li>
+            {% endif %}
+        
+            <li class="spacer">&nbsp;</li>  
+            {% if matches.13.player_first is None %}   
+                <li class="game game-top "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-top "><a href="{% url 'user' matches.13.player_first %}">{{matches.13.player_first}}</a><span>{{matches.13.score_first}}</span></li>
+            {% endif %}
+
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.13 %}">{{matches.13.ordinal_number}}</a>&nbsp;</h2></li>
+                
+            {% if matches.13.player_second is None %}   
+                <li class="game game-bottom "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-bottom "><a href="{% url 'user' matches.13.player_second %}">{{matches.13.player_second}}</a><span>{{matches.13.score_second}}</span></li>
+            {% endif %}
+        
+            <li class="spacer">&nbsp;</li> 
+            </ul>
+
+            <ul class="round round-4">
+            <li class="spacer">&nbsp;</li>
+
+            {% if matches.14.player_first is None %}   
+                <li class="game game-top "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-top "><a href="{% url 'user' matches.14.player_first %}">{{matches.14.player_first}}</a><span>{{matches.14.score_first}}</span></li>
+            {% endif %}
+
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.14 %}">{{matches.14.ordinal_number}}</a>&nbsp;</h2></li>
+                
+            {% if matches.12.player_second is None %}   
+                <li class="game game-bottom "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-bottom "><a href="{% url 'user' matches.14.player_second %}">{{matches.14.player_second}}</a><span>{{matches.1.score_second}}</span></li>
+            {% endif %}
+
+            <li class="spacer">&nbsp;</li> 
+            </ul>
+        {% endif %}
+
+
+    {% elif tournament_type == 'teams' %}
+            {% if teams_count is 2 %}
+
+                <ul class="round round-1">
+                <li class="spacer">&nbsp;</li>
+
+                <li class="game game-top "> <a href="{% url 'team' matches.0.team_first %}">{{matches.0.team_first}}</a> <span>{{matches.0.score_first}}</span></li>
+                <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.0 %}">{{matches.0.ordinal_number}}</a>&nbsp;</h2></li>
+                <li class="game game-bottom "> <a href="{% url 'team' matches.0.team_second %}">{{matches.0.team_second}}</a><span>{{matches.0.score_second}}</span></li>
+                </ul>
+
+            {% elif teams_count is 4%}
+
+                <ul class="round round-1">
+                <li class="spacer">&nbsp;</li>
+
+                <li class="game game-top "> <a href="{% url 'team' matches.0.team_first %}">{{matches.0.team_first}}</a> <span>{{matches.0.score_first}}</span></li>
+                <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.0 %}">{{matches.0.ordinal_number}}</a>&nbsp;</h2></li>
+                <li class="game game-bottom "><a href="{% url 'team' matches.0.team_second %}">{{matches.0.team_second}}</a><span>{{matches.0.score_second}}</span></li>
+
+                <li class="spacer">&nbsp;</li>
+                
+                <li class="game game-top "><a href="{% url 'team' matches.1.team_first %}">{{matches.1.team_first}}</a><span>{{matches.1.score_first}}</span></li>
+                <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.1 %}">{{matches.1.ordinal_number}}</a>&nbsp;</h2></li>
+                <li class="game game-bottom "> <a href="{% url 'team' matches.1.team_second %}">{{matches.1.team_second}}</a><span>{{matches.1.score_second}}</span></li>
+                <li class="spacer">&nbsp;</li>
+                </ul>
+
+                <ul class="round round-2">
+
+                <li class="spacer">&nbsp;</li>
+            
+            {% if matches.2.team_first is None %}   
+                <li class="game game-top "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-top "><a href="{% url 'team' matches.2.team_first %}">{{matches.2.team_first}}</a><span>{{matches.2.score_first}}</span></li>
+            {% endif %}
+
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.2 %}">{{matches.2.ordinal_number}}</a>&nbsp;</h2></li>
+
+            {% if matches.2.team_second is None %}   
+                <li class="game game-bottom "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-bottom "><a href="{% url 'team' matches.2.team_second %}">{{matches.2.team_second}}</a><span>{{matches.2.score_second}}</span></li>
+            {% endif %}
+
+            <li class="spacer">&nbsp;</li>
+            </ul>
+
+        {% elif teams_count is 8 %}
+            <ul class="round round-1">
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top "> <a href="{% url 'team' matches.0.team_first %}">{{matches.0.team_first}}</a> <span>{{matches.0.score_first}}</span></li>
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.0 %}">{{matches.0.ordinal_number}}</a>&nbsp;</h2></li>
+            <li class="game game-bottom "> <a href="{% url 'team' matches.0.team_second %}">{{matches.0.team_second}}</a><span>{{matches.0.score_second}}</span></li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top "><a href="{% url 'team' matches.1.team_first %}">{{matches.1.team_first}}</a><span>{{matches.1.score_first}}</span></li>
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.1 %}">{{matches.1.ordinal_number}}</a>&nbsp;</h2></li>
+            <li class="game game-bottom "><a href="{% url 'team' matches.1.team_second %}">{{matches.1.team_second}}</a><span>{{matches.1.score_second}}</span></li>
+
+            <li class="spacer">&nbsp;</li>
+
+            <li class="game game-top "><a href="{% url 'team' matches.2.team_first %}">{{matches.2.team_first}}</a><span>{{matches.2.score_first}}</span></li>
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.2 %}">{{matches.2.ordinal_number}}</a>&nbsp;</h2></li>
+            <li class="game game-bottom "> <a href="{% url 'team' matches.2.team_second %}">{{matches.2.team_second}}</a><span>{{matches.2.score_second}}</span></li>
+            
+            <li class="spacer">&nbsp;</li>
+
+            <li class="game game-top "><a href="{% url 'team' matches.3.team_first %}">{{matches.3.team_first}}</a><span>{{matches.3.score_first}}</span></li>
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.3 %}">{{matches.3.ordinal_number}}</a>&nbsp;</h2></li>
+            <li class="game game-bottom "><a href="{% url 'team' matches.3.team_second %}">{{matches.3.team_second}}</a><span>{{matches.3.score_second}}</span></li>
+            
+            <li class="spacer">&nbsp;</li>
+            </ul>
+
+
+            <ul class="round round-2">
+
+            <li class="spacer">&nbsp;</li>
+            
+            {% if matches.4.team_first is None %}   
+                <li class="game game-top "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-top "><a href="{% url 'team' matches.4.team_first %}">{{matches.4.team_first}}</a><span>{{matches.4.score_first}}</span></li>
+            {% endif %}
+            
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.4 %}">{{matches.4.ordinal_number}}</a>&nbsp;</h2></li>
+           
+            {% if matches.4.team_second is None %}   
+                <li class="game game-bottom "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-bottom "><a href="{% url 'team' matches.4.team_second %}">{{matches.4.team_second}}</a><span>{{matches.4.score_second}}</span></li>
+            {% endif %}
+
+            <li class="spacer">&nbsp;</li>
+
+            {% if matches.5.team_first is None %}   
+                <li class="game game-top "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-top "><a href="{% url 'team' matches.5.team_first %}">{{matches.5.team_first}}</a><span>{{matches.5.score_first}}</span></li>
+            {% endif %}
+
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.5 %}">{{matches.5.ordinal_number}}</a>&nbsp;</h2></li>
+
+            {% if matches.5.team_second is None %}   
+                <li class="game game-bottom "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-bottom "><a href="{% url 'team' matches.5.team_second %}">{{matches.5.team_second}}</a><span>{{matches.5.score_second}}</span></li>
+            {% endif %}
+            
+            <li class="spacer">&nbsp;</li>
+            </ul>
+            
+            <ul class="round round-3">
+            <li class="spacer">&nbsp;</li>
+
+
+            {% if matches.6.team_first is None %}   
+                <li class="game game-top "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-top "><a href="{% url 'team' matches.6.team_first %}">{{matches.6.team_first}}</a><span>{{matches.6.score_first}}</span></li>
+            {% endif %}
+
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.6 %}">{{matches.6.ordinal_number}}</a>&nbsp;</h2></li>
+
+            {% if matches.6.team_second is None %}   
+                <li class="game game-bottom "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-bottom "><a href="{% url 'team' matches.6.team_second %}">{{matches.6.team_second}}</a><span>{{matches.6.score_second}}</span></li>
+            {% endif %}
+
+            <li class="spacer">&nbsp;</li>  
+            </ul>
+
+        {% elif teams_count is 16 %}
+            <ul class="round round-1">
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top "> <a href="{% url 'team' matches.0.team_first %}">{{matches.0.team_first}}</a> <span>{{matches.0.score_first}}</span></li>
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.0 %}">{{matches.0.ordinal_number}}</a>&nbsp;</h2></li>
+            <li class="game game-bottom "> <a href="{% url 'team' matches.0.team_second %}">{{matches.0.team_second}}</a><span>{{matches.0.score_second}}</span></li>
+    
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top "><a href="{% url 'team' matches.1.team_first %}">{{matches.1.team_first}}</a><span>{{matches.1.score_first}}</span></li>
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.1 %}">{{matches.1.ordinal_number}}</a>&nbsp;</h2></li>
+            <li class="game game-bottom "><a href="{% url 'team' matches.1.team_second %}">{{matches.1.team_second}}</a><span>{{matches.1.score_second}}</span></li>
+    
+            <li class="spacer">&nbsp;</li>
+    
+            <li class="game game-top "><a href="{% url 'team' matches.2.team_first %}">{{matches.2.team_first}}</a><span>{{matches.2.score_first}}</span></li>
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.2 %}">{{matches.2.ordinal_number}}</a>&nbsp;</h2></li>
+            <li class="game game-bottom "> <a href="{% url 'team' matches.2.team_second %}">{{matches.2.team_second}}</a><span>{{matches.2.score_second}}</span></li>
+            
+            <li class="spacer">&nbsp;</li>
+    
+            <li class="game game-top "><a href="{% url 'team' matches.3.team_first %}">{{matches.3.team_first}}</a><span>{{matches.3.score_first}}</span></li>
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.3 %}">{{matches.3.ordinal_number}}</a>&nbsp;</h2></li>
+            <li class="game game-bottom "><a href="{% url 'team' matches.3.team_second %}">{{matches.3.team_second}}</a><span>{{matches.3.score_second}}</span></li>
+            
+            <li class="spacer">&nbsp;</li>
+    
+            
+            <li class="game game-top "> <a href="{% url 'team' matches.4.team_first %}">{{matches.4.team_first}}</a> <span>{{matches.4.score_first}}</span></li>
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.4 %}">{{matches.4.ordinal_number}}</a>&nbsp;</h2></li>
+            <li class="game game-bottom "> <a href="{% url 'team' matches.4.team_second %}">{{matches.4.team_second}}</a><span>{{matches.4.score_second}}</span></li>
+    
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top "><a href="{% url 'team' matches.5.team_first %}">{{matches.5.team_first}}</a><span>{{matches.5.score_first}}</span></li>
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.5 %}">{{matches.5.ordinal_number}}</a>&nbsp;</h2></li>
+            <li class="game game-bottom "><a href="{% url 'team' matches.5.team_second %}">{{matches.5.team_second}}</a><span>{{matches.5.score_second}}</span></li>
+    
+            <li class="spacer">&nbsp;</li>
+    
+            <li class="game game-top "><a href="{% url 'team' matches.6.team_first %}">{{matches.6.team_first}}</a><span>{{matches.6.score_first}}</span></li>
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.6 %}">{{matches.6.ordinal_number}}</a>&nbsp;</h2></li>
+            <li class="game game-bottom "> <a href="{% url 'team' matches.6.team_second %}">{{matches.6.team_second}}</a><span>{{matches.6.score_second}}</span></li>
+            
+            <li class="spacer">&nbsp;</li>
+    
+            <li class="game game-top "><a href="{% url 'team' matches.7.team_first %}">{{matches.7.team_first}}</a><span>{{matches.7.score_first}}</span></li>
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.7 %}">{{matches.7.ordinal_number}}</a>&nbsp;</h2></li>
+            <li class="game game-bottom "><a href="{% url 'team' matches.7.team_second %}">{{matches.7.team_second}}</a><span>{{matches.7.score_second}}</span></li>
+            
+            <li class="spacer">&nbsp;</li>
+            </ul>
+    
+    
+            <ul class="round round-2">
+    
+            <li class="spacer">&nbsp;</li>
+    
+    
+            {% if matches.8.team_first is None %}   
+                <li class="game game-top "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-top "><a href="{% url 'team' matches.8.team_first %}">{{matches.8.team_first}}</a><span>{{matches.8.score_first}}</span></li>
+            {% endif %}
+    
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.8 %}">{{matches.8.ordinal_number}}</a>&nbsp;</h2></li>
+                
+            {% if matches.8.team_second is None %}   
+                <li class="game game-bottom "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-bottom "><a href="{% url 'team' matches.8.team_second %}">{{matches.8.team_second}}</a><span>{{matches.8.score_second}}</span></li>
+            {% endif %}
+    
+            <li class="spacer">&nbsp;</li>
+    
+            {% if matches.9.team_first is None %}   
+                <li class="game game-top "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-top "><a href="{% url 'team' matches.9.team_first %}">{{matches.9.team_first}}</a><span>{{matches.9.score_first}}</span></li>
+            {% endif %}
+    
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.9 %}">{{matches.9.ordinal_number}}</a>&nbsp;</h2></li>
+                
+            {% if matches.5.team_second is None %}   
+                <li class="game game-bottom "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-bottom "><a href="{% url 'team' matches.9.team_second %}">{{matches.9.team_second}}</a><span>{{matches.9.score_second}}</span></li>
+            {% endif %}
+    
+            
+            <li class="spacer">&nbsp;</li>
+    
+            {% if matches.10.team_first is None %}   
+                <li class="game game-top "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-top "><a href="{% url 'team' matches.10.team_first %}">{{matches.10.team_first}}</a><span>{{matches.10.score_first}}</span></li>
+            {% endif %}
+    
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.10 %}">{{matches.10.ordinal_number}}</a>&nbsp;</h2></li>
+                
+            {% if matches.10.team_second is None %}   
+                <li class="game game-bottom "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-bottom "><a href="{% url 'team' matches.10.team_second %}">{{matches.10.team_second}}</a><span>{{matches.10.score_second}}</span></li>
+            {% endif %}
+    
+            <li class="spacer">&nbsp;</li>
+    
+            {% if matches.11.team_first is None %}   
+                <li class="game game-top "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-top "><a href="{% url 'team' matches.11.team_first %}">{{matches.11.team_first}}</a><span>{{matches.11.score_first}}</span></li>
+            {% endif %}
+    
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.11 %}">{{matches.11.ordinal_number}}</a>&nbsp;</h2></li>
+                
+            {% if matches.11.team_second is None %}   
+                <li class="game game-bottom "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-bottom "><a href="{% url 'team' matches.11.team_second %}">{{matches.11.team_second}}</a><span>{{matches.11.score_second}}</span></li>
+            {% endif %}
+    
+            
+            <li class="spacer">&nbsp;</li>
+            </ul>
+            
+            <ul class="round round-3">
+            <li class="spacer">&nbsp;</li>
+    
+            {% if matches.12.team_first is None %}   
+                <li class="game game-top "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-top "><a href="{% url 'team' matches.12.team_first %}">{{matches.12.team_first}}</a><span>{{matches.12.score_first}}</span></li>
+            {% endif %}
+    
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.12 %}">{{matches.12.ordinal_number}}</a>&nbsp;</h2></li>
+                
+            {% if matches.12.team_second is None %}   
+                <li class="game game-bottom "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-bottom "><a href="{% url 'team' matches.12.team_second %}">{{matches.12.team_second}}</a><span>{{matches.12.score_second}}</span></li>
+            {% endif %}
+        
+            <li class="spacer">&nbsp;</li>  
+            {% if matches.13.team_first is None %}   
+                <li class="game game-top "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-top "><a href="{% url 'team' matches.13.team_first %}">{{matches.13.team_first}}</a><span>{{matches.13.score_first}}</span></li>
+            {% endif %}
+    
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.13 %}">{{matches.13.ordinal_number}}</a>&nbsp;</h2></li>
+                
+            {% if matches.13.team_second is None %}   
+                <li class="game game-bottom "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-bottom "><a href="{% url 'team' matches.13.team_second %}">{{matches.13.team_second}}</a><span>{{matches.13.score_second}}</span></li>
+            {% endif %}
+        
+            <li class="spacer">&nbsp;</li> 
+            </ul>
+    
+            <ul class="round round-4">
+            <li class="spacer">&nbsp;</li>
+
+            {% if matches.14.team_first is None %}   
+                <li class="game game-top "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-top "><a href="{% url 'team' matches.14.team_first %}">{{matches.14.team_first}}</a><span>{{matches.14.score_first}}</span></li>
+            {% endif %}
+
+            <li class="game game-spacer"><pre><h2><a href="{% url 'match' matches.14 %}">{{matches.14.ordinal_number}}</a>&nbsp;</h2></li>
+                
+            {% if matches.12.team_second is None %}   
+                <li class="game game-bottom "><font color="#919191"> no winner</font><span></span></li>
+            {% else %}
+                <li class="game game-bottom "><a href="{% url 'team' matches.14.team_second %}">{{matches.14.team_second}}</a><span>{{matches.1.score_second}}</span></li>
+            {% endif %}
+            
+            <li class="spacer">&nbsp;</li> 
+            </ul>
+        {% endif %}
+
+    {% endif %}
+    </main>
+
+<style>
+    main{
+        display:flex;
+        flex-direction:row;
+        }
+        .round{
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        width:200px;
+        list-style:none;
+        padding:0;
+        }
+        .round .spacer{ flex-grow:1; }
+        .round .spacer:first-child,
+        .round .spacer:last-child{ flex-grow:.5; }
+    
+        .round .game-spacer{
+            flex-grow:1;
+        }
+    
+        li.game{
+        padding-left:20px;
+        }
+    
+        li.game.winner{
+            font-weight:bold;
+        }
+        li.game span{
+            float:right;
+            margin-right:5px;
+        }
+    
+        li.game-top{ border-bottom:2px solid #000000; }
+    
+        li.game-spacer{ 
+            border-right:2px solid #000000;
+            min-height:40px;
+        }
+    
+        li.game-bottom{ 
+            border-top:2px solid #000000;
+        }
+
+    </style>
+
+{% endblock content %}

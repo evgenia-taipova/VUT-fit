@@ -1,0 +1,96 @@
+% Author: Evgeniya Taipova <xtaipo00@stud.fit.vutbr.cz>
+
+
+\documentclass[a4paper, 12pt]{article}
+
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[left=2cm, top=3cm, text={17cm, 24cm}]{geometry}
+\usepackage{times}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[unicode]{hyperref}
+
+
+
+\begin{document}
+
+	\begin{titlepage}
+		\begin{center}
+			\includegraphics[width=0.77\linewidth]{logo.png} \\
+
+			\vspace{\stretch{0.382}}
+
+			\Huge{IMP 2022/23 - Project documentation} \\
+			\LARGE{\textbf{ARM-FITkit3:Watchdog Timer application  (WDOG)}} \\
+			\vspace{\stretch{0.618}}
+		\end{center}
+
+		\begin{minipage}{0.4 \textwidth}
+			{\Large \today}
+		\end{minipage}
+		\hfill
+		\begin{minipage}[r]{0.6 \textwidth}
+			\Large
+			\begin{tabular}{l l l}
+				\textbf{Evgeniya Taipova} & \textbf{(xtaipo00)}\\
+			
+			\end{tabular}
+		\end{minipage}
+	\end{titlepage}
+
+
+	
+	\tableofcontents
+	\clearpage
+
+
+
+	\section{Introduction}
+ The goal of the project is to create an application that demonstrates the capability of the Watchdog Timer (WDOG) module available on the Kinetis K60 microcontroller from the FITkit3 platform board. This application will demonstrate both WDOG modes (periodic, windowed) and will use a Low-Power Oscillator as a clock source.
+ \section{Watchdog Timer}
+Watchdog Timer is a system for monitoring a device freezing and then restarting it. The principle of operation of this system is as follows - a timer is connected to the controlled device, which is reset by the device at regular intervals. If there was no reset for a certain period of time, then the timer concludes that the system has hung and overloads it.
+Watchdog Timer allows you to timely track down a malfunction and forcibly reset it. Thus, the efficiency of the automated device and its reliability are increased.
+
+\subsection{Description of used registers}
+In the application, we use the following registers: 
+\begin{itemize}
+\item Watchdog Status and Control Register High\verb|(WDOG_STCRHL)| is used to enable WDOG, set the Low-Power Oscillator as a clock source and enable or disable windowed mode.
+\item Watchdog Time-out Value Register High \verb|(WDOG_TOVALH)| and Watchdog Time-out Value Register Low \verb|(WDOG_TOVALL)| are used to set the period mode size.
+\item Watchdog Window Register High \verb|(WDOG_WINH)| and  Watchdog Window Register Low \\
+\verb|(WDOG_WINL)| are used to set the windowed mode size.
+\item Watchdog Refresh Register \verb|(WDOG_REFRESH)| is used with values of \verb|0xA602| and \verb|0xB480| to refresh WDOG.
+\item Watchdog Unlock Register \verb|(WDOG_UNLOCK)| is used for the actual unlock  by writing \verb|0xC520| followed by \verb|0xD928|.
+\end{itemize}
+The data was taken from the K60 Sub-Family Reference Manual.
+\subsection{Watchdog Modes}
+The Watchdog Timer application has two modes:
+\begin{enumerate}
+    \item Periodic Mode : \\
+  The watchdog timer is usually implemented as a periodic timer that is used to check for correct operation. If the message is not updated within the set time period, then the entire system is reset.
+\item Windowed Mode :\\
+WDT can work in windowed mode when the signal from the program to reset the WDT is not allowed before some time. That is, the signal should not come too early or too late. Such a feature can be useful for faster response to certain types of failure.
+\end{enumerate}
+
+	\section{Implementation}
+ This program was implemented in C programming language in the development environment Kinetis Design Studio, using \verb|MK60D10.h| library and the FITkit3 demo, authored by Ph.D. Michal Bidlo. \\ 
+ The first part of the code is devoted to defining the parameters with which the application can be launched. With this part, the user can change the Watchdog Timer mode with \verb|MODE|. Periodic mode is \verb|MODE 0x5| and windowed mode is \verb|MODE 0xD|. Also, if necessary, they can change the size of these modes with \verb|PERIOD| and \verb|WINDOW|. The default values are  10 seconds for period mode (\verb|0x7D0|), 4 seconds for windowed mode (\verb|0x320|).\\
+ Next are the functions of their demo, which checks the correct connection of FITkit3 to the computer. Also with the help of this part we set up LEDs \verb|LED_D9| and \verb|LED_D10| that flash when the Watchdog Timer is running.
+Two other functions have been created : \verb|WDOGInit()|to initialize WDOG and \verb|beepLight()|. \\ 
+The next part of the code is the main one, in which we use the functions to initialize the microcontroller and the timer. Then there is an endless loop. If the user has pressed the SW6 button, it sends a refresh message to WDOG and with the help of the function \verb|beepLight()|, the LEDs \verb|LED_D11| and \verb|LED_D12| flash and a beep is heard.
+	\section{Conclusion}
+Thus, this program demonstrates the use of the timer in two modes. It communicates with the user using button SW6, LEDs, piezo buzzer. The correctness of the program has been tested using the platform FitKit3.
+\subsection{Self-evaluation result}
+$\Sigma = (K1 + K2 * F/5) * (E + F + Q + P + D)$ \\
+$\Sigma = (0,25 +  0,75 * 4/5) * (0,7 + 4 + 2,5 + 1 + 3)$ \\
+$\Sigma = 0,85 * 11,2$ \\
+$\Sigma = 9,5$\\
+
+\begin{thebibliography}{9}
+\bibitem{texbook}
+Freescale Semiconductor. K60 Sub-Family Reference Manual, Rev. 6, Nov 2011.
+\end{thebibliography}
+\end{document}
